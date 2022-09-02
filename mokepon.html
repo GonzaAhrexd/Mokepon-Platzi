@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mokepon!</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./responsive.css">
+</head>
+
+
+<body>
+
+    <section id="Elige_mascota">
+        <h1 id="titulo">Mokepon </h1>
+        <h2 id="mascota">Elige tu mokepon: </h2>
+        <div class="tarjetas">
+            <input type="radio" name="mascota" id="Charmander">
+            <label class="tarjetaCharmander" for="Charmander">
+                <p class="tex"> Charmander </p>
+                <img src="./imagenes/4m3s.gif" alt="Charmander" class="ch">
+            </label>
+            <input type="radio" name="mascota" id="Stitch">
+            <label class="tarjetaStitch" for="Stitch">
+                <p class="tex"> Stitch </p>
+                <img src="./imagenes/sti.gif" alt="Stitch" class="ch">
+            </label>
+            <input type="radio" name="mascota" id="Hongo">
+            <label class="tarjetaHongo" for="Hongo">
+                <p class="tex"> Hongo</p>
+                <img src="./imagenes/hongooo.gif" alt="Hongo" class="ch">
+            </label>
+        </div>
+        <button id="boton-mascota" class="botoncito">Seleccionar</button>
+    </section>
+    <section id="Elige_Ataque">
+        <h2 id="mascota">Elige tu ataque: </h2>
+        <div class="fixear">
+            <div class="health">
+                <div id="one" class="one" align="center">
+                    <p id="mascota-jugador"> </p>
+                    <p id="vidaJ">3</p>
+                    <p id="movJ"></p>
+                </div>
+
+                <div class="three">
+                    <img src="../Mokepon/imagenes/vs.png" alt="" width="50px" height="50px" class="vs">
+                </div>
+                <div id="two" class="two" align="center">
+                    <p id="mascota-enemigo"> </p>
+                    <p id="vidaE">3</p>
+                    <p id="movE"></p>
+                </div>
+            </div>
+        </div>
+            <div class="botonesAtaque">
+                <button id="boton-Lanzallamas">LANZALLAMAS 🔥</button>
+                <button id="boton-Hidrobomba">HIDROBOMBA 💧</button>
+                <button id="boton-Gigadrenado">GIGADRENADO 🌿</button>
+            </div>
+
+    </section>
+    <div align="center">
+        <section class="win" id="test">
+        </section>
+        <section id="reiniciar">
+            <button class="botoncito">Reiniciar</button>
+    </div>
+    <div align="center">
+        <section id="pelea">
+            <p id="WOL">
+            </p>
+        </section>
+    </div>
+    <script src="./JavaScript/mokepon.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,379 @@
+/*Fuentes*/
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Secular+One&display=swap');
+
+/*Titulo y cuerpo*/
+#titulo {
+    color: rgb(255, 230, 0);
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+    font-size: 400%;
+    padding: 1px;
+    margin: 1px;
+}
+
+body {
+    background-image: url("./imagenes/fondo.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/*Secciones*/
+#Elige_mascota,#Elige_Ataque {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Subtitulo Elige tu ataque*/
+#mascota {
+    color: rgb(255, 230, 0);
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+    font-size: 180%;
+    padding: 1px;
+    margin: 1px;
+}
+
+/*Tarjetas  */
+
+input{
+    display: none;
+}
+
+.tarjetas {
+    display: flex;
+    flex-direction: row;
+}
+
+.tex {
+    align-self: center;
+}
+
+.ch {
+    width: 100px;
+    height: 150px;
+    align-self: center;
+
+}
+.tarjetaCharmander {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+    font-size: 24px;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    background: firebrick;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.tarjetaStitch {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+    font-size: 24px;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    background: rgb(17, 17, 168);
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.tarjetaHongo {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+    font-size: 24px;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    background: rgb(19, 168, 19);
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.tarjetaCharmander:hover,#Charmander:checked + label {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+    font-size: 24px;
+    flex-direction: column;
+    width: 190px;
+    height: 190px;
+    background: rgb(223, 128, 128);
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+
+.tarjetaStitch:hover,#Stitch:checked + label {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+    font-size: 24px;
+    flex-direction: column;
+    width: 190px;
+    height: 190px;
+    background: rgb(76, 76, 180);
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.tarjetaHongo:hover, #Hongo:checked + label {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    align-self: center;
+    justify-content: center;
+    display: flex;
+    font-size: 24px;
+    flex-direction: column;
+    width: 190px;
+    height: 190px;
+    background: rgb(98, 223, 98);
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+
+/*Botones */
+.botoncito {
+    background-color: #e7d918;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid black;
+    display: inline-block;
+    font-size: 24px;
+    font-family: 'Fredoka One', cursive;
+}
+
+/*Vida*/
+#vidaE, #vidaJ{
+    color: red;
+}
+
+/*Pelea */
+#pelea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    width: 110px;
+    align-items: center;
+    margin: 10px;
+    font-family: 'Fredoka One', cursive;
+}
+
+/*Vida jugadores*/
+.health {
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+    background-color: transparent;
+    border-radius: 10px;
+    height: 120px;
+    width: 500px;
+    align-items: center;
+    margin: 100px;
+    align-content: center;
+    color: white;
+    font-family: 'Fredoka One', cursive;
+}
+
+.one{
+    grid-column: 1;
+    grid-row: 1;
+    background-color: white;
+    height: 180px;
+    width: 160px;
+    align-items: center;
+    margin: 10px;
+    align-content: center;
+    font-size: 24px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.vs{
+    margin:60px;
+}
+.two{
+    grid-column: 3;
+    grid-row: 1;
+    height: 180px;
+    width: 160px;
+    align-items: center;
+    margin: 10px;
+    font-size: 24px;
+    align-content: center;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.three{
+    grid-column: 2;
+    grid-row: 1;
+    background-color: transparent;
+    height: 180px;
+    width: 160px;
+    align-items: center;
+    margin: 10px;
+    font-size: 24px;
+    align-content: center;
+}
+
+/*GanasteOPerdiste*/
+.win {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgb(255, 230, 0);
+    border-radius: 10px;
+    width: 200px;
+    align-items: center;
+    margin: 10px;
+    font-size: 36px;
+    font-family: 'Fredoka One', cursive;
+
+    
+}
+
+
+
+/*Botones ataques*/
+.botonesAtaque{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+#boton-Lanzallamas {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 24px;
+    align-content: center;
+    height: 70px;
+    width: 200px;
+    background: firebrick;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+#boton-Lanzallamas:hover {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 24px;
+    align-content: center;
+    height: 70px;
+    width: 200px;
+    background: rgb(223, 128, 128);
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+#boton-Hidrobomba {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 24px;
+    align-content: center;
+    height: 70px;
+    width: 200px;
+    background: rgb(17, 17, 168);
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+#boton-Hidrobomba:hover {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 24px;
+    align-content: center;
+    height: 70px;
+    width: 200px;
+    background: rgb(76, 76, 180);
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+#boton-Gigadrenado {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 24px;
+    align-content: center;
+    height: 70px;
+    width: 200px;
+    background: rgb(19, 168, 19);
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+#boton-Gigadrenado:hover {
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 24px;
+    align-content: center;
+    height: 70px;
+    width: 200px;
+    background: rgb(98, 223, 98);
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+/*Otros*/
+#reiniciar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#test {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
