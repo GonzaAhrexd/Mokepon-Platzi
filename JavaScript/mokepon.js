@@ -1,16 +1,16 @@
 //Manipulación DOM
 //Secciones
-let ocultarAtaque = document.getElementById("Elige_Ataque")
-let ocultarMascota = document.getElementById("Elige_mascota")
-let msj = document.getElementById("pelea")
+const ocultarAtaque = document.getElementById("Elige_Ataque")
+const ocultarMascota = document.getElementById("Elige_mascota")
+const msj = document.getElementById("pelea")
 
 //Botones
-let botonMascotaJugador = document.getElementById("boton-mascota")
-let botonLanzallamas = document.getElementById("boton-Lanzallamas")
-let botonHidrobomba = document.getElementById("boton-Hidrobomba")
-let botonGigadrenado = document.getElementById("boton-Gigadrenado")
-let botonReiniciar = document.getElementById("reiniciar")
-let spanMascotaJugador = document.getElementById("mascota-jugador")
+const botonMascotaJugador = document.getElementById("boton-mascota")
+const botonLanzallamas = document.getElementById("boton-Lanzallamas")
+const botonHidrobomba = document.getElementById("boton-Hidrobomba")
+const botonGigadrenado = document.getElementById("boton-Gigadrenado")
+const botonReiniciar = document.getElementById("reiniciar")
+const spanMascotaJugador = document.getElementById("mascota-jugador")
 
 //Variables Globales
 let MascotaJugador = " "
