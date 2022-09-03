@@ -12,6 +12,10 @@ const botonGigadrenado = document.getElementById("boton-Gigadrenado")
 const botonReiniciar = document.getElementById("reiniciar")
 const spanMascotaJugador = document.getElementById("mascota-jugador")
 
+//Divs
+
+const divTarjeta = document.getElementById("divTarjetas")
+
 //Variables Globales
 let MascotaJugador = " "
 let MascotaEnemigo = " "
@@ -19,10 +23,64 @@ let ataqueJugador = " "
 let ataqueEnemigo = " "
 let vidaJ = 3;
 let vidaE = 3;
+let opcionDeMokepones = " "
+//Clases
+class Mokepon{
+    constructor(nombre,foto,vida,tipo){
+        this.nombre = nombre;
+        this.foto = foto;
+        this.vida = vida;
+        this.ataques = [];
+        this.tipo = tipo;
+    }
+}
+let mokepones = []
+
+let charmander = new Mokepon('Charmander', './imagenes/4m3s.gif' ,'3','tarjetaCharmander')
+let stitch = new Mokepon('Stitch', './imagenes/sti.gif' ,'3','tarjetaStitch')
+let hongo = new Mokepon('Hongo', './imagenes/hongooo.gif' ,'3','tarjetaHongo')
+
+
+charmander.ataques.push(
+    { nombre: 'Ascuas', id: 'boton-Lanzallamas'},
+    { nombre: 'Arañazo', id: 'boton-Hidrobomba'},
+    { nombre: 'Lanzallamas', id: 'boton-Gigadrenado'},
+)
+
+stitch.ataques.push(
+    { nombre: 'Placaje', id: 'boton-Lanzallamas'},
+    { nombre: 'Atraccion', id: 'boton-Hidrobomba'},
+    { nombre: 'Doble equipo', id: 'boton-Gigadrenado'},
+)
+
+hongo.ataques.push(
+    { nombre: 'Polvo veneno', id: 'boton-Lanzallamas'},
+    { nombre: 'Teletransportacion', id: 'boton-Hidrobomba'},
+    { nombre: 'Rayo solar', id: 'boton-Gigadrenado'},
+)
+
+mokepones.push(charmander,stitch,hongo)
 
 
 function iniciarJuego() {
+
+
+
     ocultarAtaque.style.display = 'none'
+
+    mokepones.forEach((mokepon)=>{
+        opcionDeMokepones = `
+        <input type="radio" name="mascota" id=${mokepon.nombre}>
+        <label class=${mokepon.tipo} for=${mokepon.nombre}>
+            <p class="tex"> ${mokepon.nombre} </p>
+            <img src=${mokepon.foto} alt=${mokepon.nombre} class="ch">
+        </label>
+        `
+        divTarjeta.innerHTML += opcionDeMokepones;
+    })
+
+    
+
     botonReiniciar.style.display = 'none'
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
     botonLanzallamas.addEventListener('click', ataqueLanzallamas)
