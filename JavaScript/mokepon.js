@@ -32,13 +32,29 @@ class Mokepon{
         this.vida = vida;
         this.ataques = [];
         this.tipo = tipo;
+       
     }
 }
+class Tipo{
+    constructor(nombre,tarjeta,color){
+        this.nombre = nombre;
+        this.tarjeta = tarjeta;
+        this.color = color;
+    }
+}
+
+
+let fuego = new Tipo('Fuego','tarjetaCharmander','firebrick')
+
+let agua = new Tipo('Agua','tarjetaStitch','rgb(17, 17, 168)')
+
+let planta = new Tipo('Planta','tarjetaHongo','rgb(19, 168, 19)')
+
 let mokepones = []
 
-let charmander = new Mokepon('Charmander', './imagenes/4m3s.gif' ,'3','tarjetaCharmander')
-let stitch = new Mokepon('Stitch', './imagenes/sti.gif' ,'3','tarjetaStitch')
-let hongo = new Mokepon('Hongo', './imagenes/hongooo.gif' ,'3','tarjetaHongo')
+let charmander = new Mokepon('Charmander', './imagenes/4m3s.gif' ,'3', fuego)
+let stitch = new Mokepon('Stitch', './imagenes/sti.gif' ,'3', agua)
+let hongo = new Mokepon('Hongo', './imagenes/hongooo.gif' ,'3', planta)
 
 
 charmander.ataques.push(
@@ -63,24 +79,17 @@ mokepones.push(charmander,stitch,hongo)
 
 
 function iniciarJuego() {
-
-
-
     ocultarAtaque.style.display = 'none'
-
     mokepones.forEach((mokepon)=>{
         opcionDeMokepones = `
         <input type="radio" name="mascota" id=${mokepon.nombre}>
-        <label class=${mokepon.tipo} for=${mokepon.nombre}>
+        <label class=${mokepon.tipo.tarjeta} for=${mokepon.nombre}>
             <p class="tex"> ${mokepon.nombre} </p>
             <img src=${mokepon.foto} alt=${mokepon.nombre} class="ch">
         </label>
         `
         divTarjeta.innerHTML += opcionDeMokepones;
     })
-
-    
-
     botonReiniciar.style.display = 'none'
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
     botonLanzallamas.addEventListener('click', ataqueLanzallamas)
@@ -99,51 +108,27 @@ function seleccionarMascotaJugador() {
     ocultarMascota.style.display = 'none'
     ocultarAtaque.style.display = 'flex'
     let tarjetaJugador = document.getElementById("one")
-    if (document.getElementById('Charmander').checked) {
-        MascotaJugador = "Charmander";
-        spanMascotaJugador.innerHTML = 'Charmander '
-        tarjetaJugador.style.backgroundColor = "firebrick"        
-    }
-    else if (document.getElementById('Stitch').checked) {
-        MascotaJugador = "Stitch";
-        spanMascotaJugador.innerHTML = 'Stitch '
-        tarjetaJugador.style.backgroundColor = "rgb(17, 17, 168)"
-    }
-    else if (document.getElementById('Hongo').checked) {
-        MascotaJugador = "Hongo";
-        spanMascotaJugador.innerHTML = 'Hongo '
-        tarjetaJugador.style.backgroundColor = "rgb(19, 168, 19)"
-    }
-    else {
-        alert("No seleccionaste nada")
-    }
+    mokepones.forEach((mokepon)=>{
+    if (document.getElementById(mokepon.nombre).checked) {
+        console.log(mokepon.nombre)
+        MascotaJugador = mokepon.nombre
+        spanMascotaJugador.innerHTML = mokepon.nombre
+        tarjetaJugador.style.backgroundColor = mokepon.tipo.color      
+    } 
+})
+    
+
     seleccionarMascotaEnemigo()
 }
 
 function seleccionarMascotaEnemigo() {
 
-    let enemigo = aleatorio(1, 3)
+    let enemigo = aleatorio(0, mokepones.length - 1)
     let spanMascotaEnemigo = document.getElementById("mascota-enemigo")
     let tarjetaEnemigo = document.getElementById("two")
-    if (enemigo == 1) {
-        MascotaEnemigo = "Charmander";
-        spanMascotaEnemigo.innerHTML = 'Charmander '
-        tarjetaEnemigo.style.backgroundColor = "firebrick"
-    }
-    else if (enemigo == 2) {
-        MascotaEnemigo = "Stitch";
-        spanMascotaEnemigo.innerHTML = 'Stitch '
-        tarjetaEnemigo.style.backgroundColor = "rgb(17, 17, 168)"
-    }
-    else if (enemigo == 3) {
-        MascotaEnemigo = "Hongo";
-        spanMascotaEnemigo.innerHTML = 'Hongo '
-        tarjetaEnemigo.style.backgroundColor = "rgb(19, 168, 19)"
-       
-    }
-    else {
-        alert("No seleccionaste nada")
-    }
+    MascotaEnemigo = mokepones[enemigo]
+    spanMascotaEnemigo.innerHTML = mokepones[enemigo].nombre
+    tarjetaEnemigo.style.backgroundColor = mokepones[enemigo].tipo.color
 }
 
 function ataqueLanzallamas() {
