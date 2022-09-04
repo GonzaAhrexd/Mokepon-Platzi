@@ -57,7 +57,7 @@ input{
     align-self: center;
 
 }
-.tarjetaCharmander {
+.tarjetaFuego {
     color: white;
     font-family: 'Fredoka One', cursive;
     align-self: center;
@@ -75,7 +75,7 @@ input{
     border: 1px solid black;
 }
 
-.tarjetaStitch {
+.tarjetaAgua {
     color: white;
     font-family: 'Fredoka One', cursive;
     align-self: center;
@@ -93,7 +93,7 @@ input{
     border: 1px solid black;
 }
 
-.tarjetaHongo {
+.tarjetaPlanta {
     color: white;
     font-family: 'Fredoka One', cursive;
     align-self: center;
@@ -111,7 +111,7 @@ input{
     border: 1px solid black;
 }
 
-.tarjetaCharmander:hover,#Charmander:checked + label {
+.tarjetaFuego:hover,#Charmander:checked + label {
     color: white;
     font-family: 'Fredoka One', cursive;
     align-self: center;
@@ -130,7 +130,7 @@ input{
 }
 
 
-.tarjetaStitch:hover,#Stitch:checked + label {
+.tarjetaAgua:hover,#Stitch:checked + label {
     color: white;
     font-family: 'Fredoka One', cursive;
     align-self: center;
@@ -148,7 +148,7 @@ input{
     border: 1px solid black;
 }
 
-.tarjetaHongo:hover, #Hongo:checked + label {
+.tarjetaPlanta:hover, #Hongo:checked + label {
     color: white;
     font-family: 'Fredoka One', cursive;
     align-self: center;

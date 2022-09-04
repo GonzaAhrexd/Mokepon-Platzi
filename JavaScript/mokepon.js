@@ -13,10 +13,11 @@ const botonReiniciar = document.getElementById("reiniciar")
 const spanMascotaJugador = document.getElementById("mascota-jugador")
 
 //Divs
-
 const divTarjeta = document.getElementById("divTarjetas")
+const divAtaque = document.getElementById("divAtaques")
 
 //Variables Globales
+let mokepones = []
 let MascotaJugador = " "
 let MascotaEnemigo = " "
 let ataqueJugador = " "
@@ -24,6 +25,8 @@ let ataqueEnemigo = " "
 let vidaJ = 3;
 let vidaE = 3;
 let opcionDeMokepones = " "
+let ataquesMokepon = " "
+
 //Clases
 class Mokepon{
     constructor(nombre,foto,vida,tipo){
@@ -43,20 +46,20 @@ class Tipo{
     }
 }
 
+//Tipos
+let fuego = new Tipo('Fuego','tarjetaFuego','firebrick')
+let agua = new Tipo('Agua','tarjetaAgua','rgb(17, 17, 168)')
+let planta = new Tipo('Planta','tarjetaPlanta','rgb(19, 168, 19)')
 
-let fuego = new Tipo('Fuego','tarjetaCharmander','firebrick')
-
-let agua = new Tipo('Agua','tarjetaStitch','rgb(17, 17, 168)')
-
-let planta = new Tipo('Planta','tarjetaHongo','rgb(19, 168, 19)')
-
-let mokepones = []
-
+//Mokepones
 let charmander = new Mokepon('Charmander', './imagenes/4m3s.gif' ,'3', fuego)
 let stitch = new Mokepon('Stitch', './imagenes/sti.gif' ,'3', agua)
 let hongo = new Mokepon('Hongo', './imagenes/hongooo.gif' ,'3', planta)
 
 
+
+
+//Ataques Mokepones
 charmander.ataques.push(
     { nombre: 'Ascuas', id: 'boton-Lanzallamas'},
     { nombre: 'Arañazo', id: 'boton-Hidrobomba'},
@@ -77,7 +80,7 @@ hongo.ataques.push(
 
 mokepones.push(charmander,stitch,hongo)
 
-
+//Funciones
 function iniciarJuego() {
     ocultarAtaque.style.display = 'none'
     mokepones.forEach((mokepon)=>{
@@ -114,15 +117,25 @@ function seleccionarMascotaJugador() {
         MascotaJugador = mokepon.nombre
         spanMascotaJugador.innerHTML = mokepon.nombre
         tarjetaJugador.style.backgroundColor = mokepon.tipo.color      
-    } 
+    }
 })
-    
-
+    extraerAtaques(MascotaJugador)
     seleccionarMascotaEnemigo()
 }
 
-function seleccionarMascotaEnemigo() {
+function extraerAtaques(MascotaJugador){
+    let ataques
 
+    mokepones.forEach((mokepon)  => {
+        if(MascotaJugador === mokepon.nombre){
+            ataques = mokepon.ataques;
+        }
+    })
+    console.log(ataques)
+    mostrarAtaques(ataques)
+}
+
+function seleccionarMascotaEnemigo() {
     let enemigo = aleatorio(0, mokepones.length - 1)
     let spanMascotaEnemigo = document.getElementById("mascota-enemigo")
     let tarjetaEnemigo = document.getElementById("two")
@@ -134,22 +147,16 @@ function seleccionarMascotaEnemigo() {
 function ataqueLanzallamas() {
     ataqueJugador = "Lanzallamas"
     enemigo()
-
-   
 }
 
 function ataqueHidrobomba() {
     ataqueJugador = "Hidrobomba"
     enemigo()
-
- 
 }
 
 function ataqueGigadrenado() {
     ataqueJugador = "Gigadrenado"
     enemigo()
-
-    
 }
 
 function enemigo() {

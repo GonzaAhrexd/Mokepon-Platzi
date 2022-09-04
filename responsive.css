@@ -18,7 +18,7 @@
 
     /*Elegir personajes*/
 
-    .tarjetaCharmander {
+    .tarjetaFuego {
         color: white;
         font-family: 'Fredoka One', cursive;
         align-self: center;
@@ -36,7 +36,7 @@
         border: 1px solid black;
     }
 
-    .tarjetaStitch {
+    .tarjetaAgua {
         color: white;
         font-family: 'Fredoka One', cursive;
         align-self: center;
@@ -54,7 +54,7 @@
         border: 1px solid black;
     }
 
-    .tarjetaHongo {
+    .tarjetaPlanta {
         color: white;
         font-family: 'Fredoka One', cursive;
         align-self: center;
@@ -73,7 +73,7 @@
     }
 
 
-    .tarjetaCharmander:hover,
+    .tarjetaFuego:hover,
     #Charmander:checked+label {
         color: white;
         font-family: 'Fredoka One', cursive;
@@ -93,7 +93,7 @@
     }
 
 
-    .tarjetaStitch:hover,
+    .tarjetaAgua:hover,
     #Stitch:checked+label {
         color: white;
         font-family: 'Fredoka One', cursive;
@@ -112,7 +112,7 @@
         border: 1px solid black;
     }
 
-    .tarjetaHongo:hover,
+    .tarjetaPlanta:hover,
     #Hongo:checked+label {
         color: white;
         font-family: 'Fredoka One', cursive;
