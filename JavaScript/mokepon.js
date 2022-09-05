@@ -6,9 +6,7 @@ const msj = document.getElementById("pelea")
 
 //Botones
 const botonMascotaJugador = document.getElementById("boton-mascota")
-const botonLanzallamas = document.getElementById("boton-Lanzallamas")
-const botonHidrobomba = document.getElementById("boton-Hidrobomba")
-const botonGigadrenado = document.getElementById("boton-Gigadrenado")
+
 const botonReiniciar = document.getElementById("reiniciar")
 const spanMascotaJugador = document.getElementById("mascota-jugador")
 
@@ -16,30 +14,41 @@ const spanMascotaJugador = document.getElementById("mascota-jugador")
 const divTarjeta = document.getElementById("divTarjetas")
 const divAtaque = document.getElementById("divAtaques")
 
+
 //Variables Globales
 let mokepones = []
 let MascotaJugador = " "
 let MascotaEnemigo = " "
-let ataqueJugador = " "
-let ataqueEnemigo = " "
+let ataqueJugador = []
+let ataqueEnemigo = []
 let vidaJ = 3;
 let vidaE = 3;
 let opcionDeMokepones = " "
 let ataquesMokepon = " "
+let botonLanzallamas
+let botonHidrobomba
+let botonGigadrenado
+let botones = []
+let indexAtaqueJugador = []
+let indexAtaqueEnemigo = []
+
+let vicJ = 0;
+let vicE = 0;
+
 
 //Clases
-class Mokepon{
-    constructor(nombre,foto,vida,tipo){
+class Mokepon {
+    constructor(nombre, foto, vida, tipo) {
         this.nombre = nombre;
         this.foto = foto;
         this.vida = vida;
         this.ataques = [];
         this.tipo = tipo;
-       
+
     }
 }
-class Tipo{
-    constructor(nombre,tarjeta,color){
+class Tipo {
+    constructor(nombre, tarjeta, color) {
         this.nombre = nombre;
         this.tarjeta = tarjeta;
         this.color = color;
@@ -47,43 +56,43 @@ class Tipo{
 }
 
 //Tipos
-let fuego = new Tipo('Fuego','tarjetaFuego','firebrick')
-let agua = new Tipo('Agua','tarjetaAgua','rgb(17, 17, 168)')
-let planta = new Tipo('Planta','tarjetaPlanta','rgb(19, 168, 19)')
+let fuego = new Tipo('Fuego', 'tarjetaFuego', 'firebrick')
+let agua = new Tipo('Agua', 'tarjetaAgua', 'rgb(17, 17, 168)')
+let planta = new Tipo('Planta', 'tarjetaPlanta', 'rgb(19, 168, 19)')
 
 //Mokepones
-let charmander = new Mokepon('Charmander', './imagenes/4m3s.gif' ,'3', fuego)
-let stitch = new Mokepon('Stitch', './imagenes/sti.gif' ,'3', agua)
-let hongo = new Mokepon('Hongo', './imagenes/hongooo.gif' ,'3', planta)
+let charmander = new Mokepon('Charmander', './imagenes/4m3s.gif', '3', fuego)
+let stitch = new Mokepon('Stitch', './imagenes/sti.gif', '3', agua)
+let hongo = new Mokepon('Hongo', './imagenes/hongooo.gif', '3', planta)
 
 
 
 
 //Ataques Mokepones
 charmander.ataques.push(
-    { nombre: 'Ascuas', id: 'boton-Lanzallamas'},
-    { nombre: 'Arañazo', id: 'boton-Hidrobomba'},
-    { nombre: 'Lanzallamas', id: 'boton-Gigadrenado'},
+    { nombre: 'Ascuas', id: 'boton-Lanzallamas' },
+    { nombre: 'Arañazo', id: 'boton-Hidrobomba' },
+    { nombre: 'Lanzallamas', id: 'boton-Gigadrenado' },
 )
 
 stitch.ataques.push(
-    { nombre: 'Placaje', id: 'boton-Lanzallamas'},
-    { nombre: 'Atraccion', id: 'boton-Hidrobomba'},
-    { nombre: 'Doble equipo', id: 'boton-Gigadrenado'},
+    { nombre: 'Placaje', id: 'boton-Lanzallamas' },
+    { nombre: 'Atraccion', id: 'boton-Hidrobomba' },
+    { nombre: 'Doble equipo', id: 'boton-Gigadrenado' },
 )
 
 hongo.ataques.push(
-    { nombre: 'Polvo veneno', id: 'boton-Lanzallamas'},
-    { nombre: 'Teletransportacion', id: 'boton-Hidrobomba'},
-    { nombre: 'Rayo solar', id: 'boton-Gigadrenado'},
+    { nombre: 'Polvo veneno', id: 'boton-Lanzallamas' },
+    { nombre: 'Teletransportacion', id: 'boton-Hidrobomba' },
+    { nombre: 'Rayo solar', id: 'boton-Gigadrenado' },
 )
 
-mokepones.push(charmander,stitch,hongo)
+mokepones.push(charmander, stitch, hongo)
 
 //Funciones
 function iniciarJuego() {
     ocultarAtaque.style.display = 'none'
-    mokepones.forEach((mokepon)=>{
+    mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
         <input type="radio" name="mascota" id=${mokepon.nombre}>
         <label class=${mokepon.tipo.tarjeta} for=${mokepon.nombre}>
@@ -95,9 +104,7 @@ function iniciarJuego() {
     })
     botonReiniciar.style.display = 'none'
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
-    botonLanzallamas.addEventListener('click', ataqueLanzallamas)
-    botonHidrobomba.addEventListener('click', ataqueHidrobomba)
-    botonGigadrenado.addEventListener('click', ataqueGigadrenado)
+
     botonReiniciar.addEventListener('click', reiniciarJuego)
     msj.style.display = 'none';
 }
@@ -111,28 +118,70 @@ function seleccionarMascotaJugador() {
     ocultarMascota.style.display = 'none'
     ocultarAtaque.style.display = 'flex'
     let tarjetaJugador = document.getElementById("one")
-    mokepones.forEach((mokepon)=>{
-    if (document.getElementById(mokepon.nombre).checked) {
-        console.log(mokepon.nombre)
-        MascotaJugador = mokepon.nombre
-        spanMascotaJugador.innerHTML = mokepon.nombre
-        tarjetaJugador.style.backgroundColor = mokepon.tipo.color      
-    }
-})
+    mokepones.forEach((mokepon) => {
+        if (document.getElementById(mokepon.nombre).checked) {
+            console.log(mokepon.nombre)
+            MascotaJugador = mokepon.nombre
+            spanMascotaJugador.innerHTML = mokepon.nombre
+            tarjetaJugador.style.backgroundColor = mokepon.tipo.color
+        }
+    })
     extraerAtaques(MascotaJugador)
     seleccionarMascotaEnemigo()
 }
 
-function extraerAtaques(MascotaJugador){
+function extraerAtaques(MascotaJugador) {
     let ataques
 
-    mokepones.forEach((mokepon)  => {
-        if(MascotaJugador === mokepon.nombre){
+    mokepones.forEach((mokepon) => {
+        if (MascotaJugador === mokepon.nombre) {
             ataques = mokepon.ataques;
         }
     })
-    console.log(ataques)
+
     mostrarAtaques(ataques)
+}
+
+function mostrarAtaques(ataques) {
+    ataques.forEach((ataques) => {
+        ataquesDisponibles = `
+        <button id=${ataques.id} class="BAtaque">${ataques.nombre}</button>
+        `
+        divAtaque.innerHTML += ataquesDisponibles;
+    })
+
+    botonLanzallamas = document.getElementById("boton-Lanzallamas")
+    botonHidrobomba = document.getElementById("boton-Hidrobomba")
+    botonGigadrenado = document.getElementById("boton-Gigadrenado")
+    botones = document.querySelectorAll('.BAtaque')
+
+}
+
+function secuenciaAtaque() {
+    botones.forEach((boton) => {
+        boton.addEventListener('click', (e) => {
+            if (e.target.id === "boton-Lanzallamas") {
+                ataqueJugador.push('Lanzallamas')
+                indexAtaqueJugador.push('🔥')
+                enemigo()
+            } else if (e.target.id === "boton-Hidrobomba") {
+                ataqueJugador.push('Hidrobomba')
+      
+                indexAtaqueJugador.push('💧')
+                enemigo()
+            }
+
+            else {
+                ataqueJugador.push('Gigadrenado')
+                indexAtaqueJugador.push('🌿')
+
+                enemigo()
+            }
+
+
+        })
+    })
+
 }
 
 function seleccionarMascotaEnemigo() {
@@ -142,94 +191,116 @@ function seleccionarMascotaEnemigo() {
     MascotaEnemigo = mokepones[enemigo]
     spanMascotaEnemigo.innerHTML = mokepones[enemigo].nombre
     tarjetaEnemigo.style.backgroundColor = mokepones[enemigo].tipo.color
-}
 
-function ataqueLanzallamas() {
-    ataqueJugador = "Lanzallamas"
-    enemigo()
-}
-
-function ataqueHidrobomba() {
-    ataqueJugador = "Hidrobomba"
-    enemigo()
-}
-
-function ataqueGigadrenado() {
-    ataqueJugador = "Gigadrenado"
-    enemigo()
+    secuenciaAtaque()
 }
 
 function enemigo() {
     let ataque = aleatorio(1, 3)
     if (ataque == 1) {
-        ataqueEnemigo = "Lanzallamas"
+        ataqueEnemigo.push("Lanzallamas")
+        indexAtaqueEnemigo.push('🔥')
+        
     }
     else if (ataque == 2) {
-        ataqueEnemigo = "Hidrobomba"
+        ataqueEnemigo.push("Hidrobomba")
+        indexAtaqueEnemigo.push('💧')
+        
     }
     else if (ataque == 3) {
-        ataqueEnemigo = "Gigadrenado"
+        ataqueEnemigo.push("Gigadrenado")
+        indexAtaqueEnemigo.push('🌿')
+    
     }
-    combate()
+
+    iniciarPelea()
     vida()
 }
 
-function combate() {
-    msj.style.display = 'flex';
-    let combate = document.getElementById('WOL')
-    let movPl = document.getElementById('movJ')
-    let movEn = document.getElementById('movE')
-    combate.innerHTML = winlose();
-    movPl.innerHTML =  ataqueJugador;
-    movEn.innerHTML = ataqueEnemigo;
+
+function iniciarPelea() {
+    if (ataqueJugador.length === 5) {
+        let spanVidaE = document.getElementById("vidaE")
+        let spanVidaJ = document.getElementById("vidaJ")
+        winlose()
+        msj.style.display = 'flex';
+        let combate = document.getElementById('WOL')
+        let movPl = document.getElementById('movJ')
+        let movEn = document.getElementById('movE')
+
+        if (vicE > vicJ) {
+            combate.innerHTML = "Perdiste";
+            spanVidaE.innerHTML = vicE
+            spanVidaJ.innerHTML = vicJ
+            final()
+        }
+        else if (vicJ > vicE) {
+            combate.innerHTML = "Ganaste"
+            spanVidaE.innerHTML = vicE
+            spanVidaJ.innerHTML = vicJ
+            final()
+        }
+        else {
+            combate.innerHTML = "Empate"
+            spanVidaE.innerHTML = vicE
+            spanVidaJ.innerHTML = vicJ
+            final()
+        }
+        movPl.innerHTML = indexAtaqueJugador;
+        movEn.innerHTML = indexAtaqueEnemigo;
+    }
+
 }
+
 
 function winlose() {
-    if (ataqueJugador == "Lanzallamas" && ataqueEnemigo == "Hidrobomba" || ataqueJugador == "Hidrobomba" && ataqueEnemigo == "Gigadrenado" || ataqueJugador == "Gigadrenado" && ataqueEnemigo == "Lanzallamas") {
-        vidaJ = vidaJ - 1
-        return "PERDISTE"  
-    }
-    if (ataqueJugador == ataqueEnemigo) {
-        return "EMPATE"
-    }
-    else {
-        vidaE = vidaE - 1
-        return "GANASTE"
-        
-    }
-}
 
-function vida(){
-    let spanVidaE = document.getElementById("vidaE")
-    let spanVidaJ = document.getElementById("vidaJ")    
-    let test = document.getElementById("test")   
 
-    if(vidaE!=0 && vidaJ!=0){
-        spanVidaE.innerHTML = vidaE
-        spanVidaJ.innerHTML = vidaJ
+    for (let i = 0; i < ataqueJugador.length; i++) {
+        if (ataqueJugador[i] == "Lanzallamas" && ataqueEnemigo[i] == "Hidrobomba" || ataqueJugador[i] == "Hidrobomba" && ataqueEnemigo[i] == "Gigadrenado" || ataqueJugador[i] == "Gigadrenado" && ataqueEnemigo[i] == "Lanzallamas") {
+            vicE++
+        }
+        else if (ataqueEnemigo[i] == "Lanzallamas" && ataqueJugador[i] == "Hidrobomba" || ataqueEnemigo[i] == "Hidrobomba" && ataqueJugador[i] == "Gigadrenado" || ataqueEnemigo[i] == "Gigadrenado" && ataqueJugador[i] == "Lanzallamas") {
+            vicJ++
+        }
+
+        if (ataqueJugador[i] == ataqueEnemigo[i]) {
+            console.log('empate')
+        }
     }
-    else if(vidaE==0){
-        alert("Fin del juego GANASTE")
-        spanVidaE.innerHTML = vidaE 
-        test.innerHTML = "GANASTE"
-        final()
-    }
-    else if(vidaJ==0){
-        alert("Fin del juego PERDISTE")  
-        spanVidaJ.innerHTML = vidaJ
-        test.innerHTML = "PERDISTE"
-        final()
-    }
-   
+
 }
-function final(){
+function vida() {
+    // let spanVidaE = document.getElementById("vidaE")
+    // let spanVidaJ = document.getElementById("vidaJ")
+    // let test = document.getElementById("test")
+
+    // if (vicE != 5 && vicJ != 5) {
+    //     spanVidaE.innerHTML = vicE 
+    //     spanVidaJ.innerHTML = vicJ
+    // }
+    // else if (vicE < vicJ) {
+    //     alert("Fin del juego GANASTE")
+    //     spanVidaE.innerHTML = vicE
+    //     test.innerHTML = "GANASTE"
+    //     final()
+    // }
+    // else if (vicE > vicJ) {
+    //     alert("Fin del juego PERDISTE")
+    //     spanVidaJ.innerHTML = vicJ
+    //     test.innerHTML = "PERDISTE"
+    //     final()
+    // }
+
+}
+function final() {
     botonLanzallamas.disabled = true
     botonHidrobomba.disabled = true
     botonGigadrenado.disabled = true
     botonReiniciar.style.display = 'flex'
 
 }
-function reiniciarJuego(){
+function reiniciarJuego() {
     location.reload()
 }
 
