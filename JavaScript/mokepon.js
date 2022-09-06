@@ -37,7 +37,7 @@ let vicJ = 0;
 let vicE = 0;
 
 let lienzo = mapa.getContext('2d')
-
+let intervalo
 //Clases
 class Mokepon {
     constructor(nombre, foto, vida, tipo) {
@@ -49,9 +49,11 @@ class Mokepon {
         this.x = 20;
         this.y = 30;
         this.width = 80;
-        this.height = 80; 
+        this.height = 80;
         this.mapaFoto = new Image()
         this.mapaFoto.src = foto
+        this.velocidadX = 0
+        this.velocidadY = 0
     }
 }
 class Tipo {
@@ -126,8 +128,12 @@ function seleccionarMascotaJugador() {
     ocultarMascota.style.display = 'none'
     ocultarAtaque.style.display = 'none'
     verMapa.style.display = 'flex'
-    
 
+    intervalo = setInterval(pintarPersonaje, 50)
+
+    window.addEventListener('keydown', presionado)
+
+    window.addEventListener('keyup', detener)
 
     let tarjetaJugador = document.getElementById("one")
     mokepones.forEach((mokepon) => {
@@ -178,7 +184,7 @@ function secuenciaAtaque() {
                 enemigo()
             } else if (e.target.id === "boton-Hidrobomba") {
                 ataqueJugador.push('Hidrobomba')
-      
+
                 indexAtaqueJugador.push('💧')
                 enemigo()
             }
@@ -212,17 +218,17 @@ function enemigo() {
     if (ataque == 1) {
         ataqueEnemigo.push("Lanzallamas")
         indexAtaqueEnemigo.push('🔥')
-        
+
     }
     else if (ataque == 2) {
         ataqueEnemigo.push("Hidrobomba")
         indexAtaqueEnemigo.push('💧')
-        
+
     }
     else if (ataque == 3) {
         ataqueEnemigo.push("Gigadrenado")
         indexAtaqueEnemigo.push('🌿')
-    
+
     }
 
     iniciarPelea()
@@ -316,8 +322,11 @@ function reiniciarJuego() {
     location.reload()
 }
 
-function pintarPersonaje(){
-    lienzo.clearRect(0,0,mapa.width,mapa.height)
+function pintarPersonaje() {
+    charmander.x = charmander.x + charmander.velocidadX
+    charmander.y = charmander.y + charmander.velocidadY
+    lienzo.clearRect(0, 0, mapa.width, mapa.height)
+
     lienzo.drawImage(
         charmander.mapaFoto,
         charmander.x,
@@ -327,22 +336,48 @@ function pintarPersonaje(){
     )
 }
 
-function moverCharmanderRight(){
-    charmander.x = charmander.x + 5
-    pintarPersonaje()
+function moverCharmanderRight() {
+    charmander.velocidadX = 5
+
 }
-function moverCharmanderDown(){
-    charmander.y = charmander.y + 5
-    pintarPersonaje()
+function moverCharmanderDown() {
+    charmander.velocidadY = 5
+
 }
-function moverCharmanderLeft(){
-    charmander.x = charmander.x -5
-    pintarPersonaje()
+function moverCharmanderLeft() {
+    charmander.velocidadX = -5
+
 }
-function moverCharmanderUp(){
-    charmander.y = charmander.y - 5
-    pintarPersonaje()
+function moverCharmanderUp() {
+    charmander.velocidadY = - 5
+
 }
+function detener() {
+    charmander.velocidadX = 0
+    charmander.velocidadY = 0
+}
+
+function presionado(event) {
+    switch (event.key) {
+        case 'ArrowUp':
+            moverCharmanderUp()
+            break;
+        case 'ArrowDown':
+            moverCharmanderDown()
+            break;
+        case 'ArrowLeft':
+            moverCharmanderLeft()
+            break;
+        case 'ArrowRight':
+            moverCharmanderRight()
+            break;
+        default:
+            break;
+    }
+    console.log(event.key)
+}
+
+
 window.addEventListener('load', iniciarJuego)
 
 

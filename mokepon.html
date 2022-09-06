@@ -24,10 +24,10 @@
         <h1 id="titulo">Recorre el  mapa</h1>
       <p>  <canvas id="mapa"></p>
         <div class="botonesAtaque">
-        <button onClick="moverCharmanderRight()" class="botoncito">➡</button>
-        <button onClick="moverCharmanderLeft()" class="botoncito">⬅</button>
-        <button onClick="moverCharmanderUp()" class="botoncito">⬆</button>
-        <button onClick="moverCharmanderDown()" class="botoncito">⬇</button>
+        <button onmouseup="detener()" onmousedown="moverCharmanderRight()" class="botoncito">➡</button>
+        <button onmouseup="detener()" onmousedown="moverCharmanderLeft()" class="botoncito">⬅</button>
+        <button onmouseup="detener()" onmousedown="moverCharmanderUp()" class="botoncito">⬆</button>
+        <button onmouseup="detener()" onmousedown="moverCharmanderDown()" class="botoncito">⬇</button>
         </canvas>
     </div>
     </section>
