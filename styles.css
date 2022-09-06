@@ -377,3 +377,11 @@ input{
     justify-content: center;
 }
 
+#verMapa{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#mapa{
+    border: 2px solid white;
+}

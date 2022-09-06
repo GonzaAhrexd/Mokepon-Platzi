@@ -3,7 +3,7 @@
 const ocultarAtaque = document.getElementById("Elige_Ataque")
 const ocultarMascota = document.getElementById("Elige_mascota")
 const msj = document.getElementById("pelea")
-
+const verMapa = document.getElementById("verMapa")
 //Botones
 const botonMascotaJugador = document.getElementById("boton-mascota")
 
@@ -14,6 +14,7 @@ const spanMascotaJugador = document.getElementById("mascota-jugador")
 const divTarjeta = document.getElementById("divTarjetas")
 const divAtaque = document.getElementById("divAtaques")
 
+const mapa = document.getElementById("mapa")
 
 //Variables Globales
 let mokepones = []
@@ -35,6 +36,7 @@ let indexAtaqueEnemigo = []
 let vicJ = 0;
 let vicE = 0;
 
+let lienzo = mapa.getContext('2d')
 
 //Clases
 class Mokepon {
@@ -44,7 +46,12 @@ class Mokepon {
         this.vida = vida;
         this.ataques = [];
         this.tipo = tipo;
-
+        this.x = 20;
+        this.y = 30;
+        this.width = 80;
+        this.height = 80; 
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
     }
 }
 class Tipo {
@@ -92,6 +99,7 @@ mokepones.push(charmander, stitch, hongo)
 //Funciones
 function iniciarJuego() {
     ocultarAtaque.style.display = 'none'
+    verMapa.style.display = 'none'
     mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
         <input type="radio" name="mascota" id=${mokepon.nombre}>
@@ -116,7 +124,11 @@ function aleatorio(min, max) {
 
 function seleccionarMascotaJugador() {
     ocultarMascota.style.display = 'none'
-    ocultarAtaque.style.display = 'flex'
+    ocultarAtaque.style.display = 'none'
+    verMapa.style.display = 'flex'
+    
+
+
     let tarjetaJugador = document.getElementById("one")
     mokepones.forEach((mokepon) => {
         if (document.getElementById(mokepon.nombre).checked) {
@@ -304,8 +316,33 @@ function reiniciarJuego() {
     location.reload()
 }
 
+function pintarPersonaje(){
+    lienzo.clearRect(0,0,mapa.width,mapa.height)
+    lienzo.drawImage(
+        charmander.mapaFoto,
+        charmander.x,
+        charmander.y,
+        charmander.width,
+        charmander.height,
+    )
+}
 
-
+function moverCharmanderRight(){
+    charmander.x = charmander.x + 5
+    pintarPersonaje()
+}
+function moverCharmanderDown(){
+    charmander.y = charmander.y + 5
+    pintarPersonaje()
+}
+function moverCharmanderLeft(){
+    charmander.x = charmander.x -5
+    pintarPersonaje()
+}
+function moverCharmanderUp(){
+    charmander.y = charmander.y - 5
+    pintarPersonaje()
+}
 window.addEventListener('load', iniciarJuego)
 
 

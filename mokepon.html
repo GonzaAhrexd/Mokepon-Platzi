@@ -19,8 +19,22 @@
         </div>
         <button id="boton-mascota" class="botoncito">Seleccionar</button>
     </section>
+
+    <section id="verMapa">
+        <h1 id="titulo">Recorre el  mapa</h1>
+      <p>  <canvas id="mapa"></p>
+        <div class="botonesAtaque">
+        <button onClick="moverCharmanderRight()" class="botoncito">➡</button>
+        <button onClick="moverCharmanderLeft()" class="botoncito">⬅</button>
+        <button onClick="moverCharmanderUp()" class="botoncito">⬆</button>
+        <button onClick="moverCharmanderDown()" class="botoncito">⬇</button>
+        </canvas>
+    </div>
+    </section>
+
     <section id="Elige_Ataque">
         <h2 id="mascota">Elige tu ataque: </h2>
+        <h3 id="restante"> </h3>
         <div class="fixear">
             <div class="health">
                 <div id="one" class="one" align="center">
@@ -42,13 +56,16 @@
                 
             </div>
     </section>
+
     <div align="center">
         <section class="win" id="test">
         </section>
+
         <section id="reiniciar">
             <button class="botoncito">Reiniciar</button>
     </div>
     <div align="center">
+
         <section id="pelea">
             <p id="WOL">
             </p>
