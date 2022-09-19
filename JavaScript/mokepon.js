@@ -17,6 +17,7 @@ const divAtaque = document.getElementById("divAtaques")
 const mapa = document.getElementById("mapa")
 
 //Variables Globales
+let jugadorId = null
 let mokepones = []
 let MascotaJugador = " "
 let MascotaEnemigo = " "
@@ -142,6 +143,21 @@ function iniciarJuego() {
 
     botonReiniciar.addEventListener('click', reiniciarJuego)
     msj.style.display = 'none';
+
+    unirseAlJuego()
+}
+
+function unirseAlJuego(){
+    fetch("http://localhost:8080/unirse")
+        .then(function (res) {
+            if(res.ok){
+                res.text()
+                    .then(function(respuesta){
+                        console.log(respuesta)
+                        jugadorId = respuesta
+                    })
+            }
+        })
 }
 
 function aleatorio(min, max) {
@@ -162,12 +178,28 @@ function seleccionarMascotaJugador() {
             MascotaJugador = mokepon.nombre
             spanMascotaJugador.innerHTML = mokepon.nombre
             tarjetaJugador.style.backgroundColor = mokepon.tipo.color
+            seleccionarMokepon(MascotaJugador)
         }
     })
+
     extraerAtaques(MascotaJugador)
+    
     iniciarMapa()
 
 }
+
+function seleccionarMokepon(MascotaJugador){
+    fetch(`http://localhost:8080/mokepon/${jugadorId}`,({
+        method: "post",
+        headers:  {
+             "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+            mokepon: MascotaJugador
+        })
+    }))
+}
+
 
 function extraerAtaques(MascotaJugador) {
     let ataques
@@ -456,6 +488,8 @@ function colision(enemigo){
         seleccionarMascotaEnemigo(enemigo)
     }
 }
+
+
 
 
 window.addEventListener('load', iniciarJuego)
