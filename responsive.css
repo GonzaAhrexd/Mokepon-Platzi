@@ -218,5 +218,43 @@
         justify-content: center;
         justify-items: center;
     }
-    
+
+    .botoncito2 {
+        background-color: #e7d918;
+        border: none;
+        color: white;
+        flex-direction: row;
+        padding: 15px 32px;
+        text-align: center;
+        border-radius: 10px;
+        border: 1px solid black;
+        display: inline-block;
+        font-size: 24px;
+        font-family: 'Fredoka One', cursive;
+        margin: 10px;
+    }
+
+    .botones2 {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        height: 50%;
+        width: 50%;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+    }
+
+    .botones3 {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        height: 50%;
+        width: 50%;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+    }
+
+
 }

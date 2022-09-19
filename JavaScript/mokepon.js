@@ -40,6 +40,17 @@ let vicE = 0;
 let combate = false;
 let lienzo = mapa.getContext('2d')
 let intervalo
+let alturaBuscada 
+let anchoMapa = window.innerWidth - 20
+const anchoMaximo = 600
+
+if(anchoMapa>anchoMaximo){
+    anchoMapa = anchoMaximo - 20
+}
+alturaBuscada= anchoMapa * 600 / 600
+
+mapa.width = anchoMapa
+mapa.height = alturaBuscada
 //Clases
 class Mokepon {
     constructor(nombre, foto, vida, tipo, fotoMapa, x=10, y=10) {
@@ -48,10 +59,10 @@ class Mokepon {
         this.vida = vida;
         this.ataques = [];
         this.tipo = tipo;
-        this.x = x;
-        this.y = y;
         this.width = 80;
         this.height = 80;
+        this.x = aleatorio(0, mapa.width - this.width);
+        this.y = aleatorio(0, mapa.height - this.height);
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -85,9 +96,9 @@ let charmander = new Mokepon('Charmander', './imagenes/4m3s.gif', '3', fuego,'./
 let stitch = new Mokepon('Stitch', './imagenes/sti.gif', '3', agua ,'./imagenes/StitchHead.png')
 let hongo = new Mokepon('Hongo', './imagenes/hongooo.gif', '3', planta, './imagenes/HongoAvatar.png')
 
-let charmanderEnemigo = new Mokepon('Charmander', './imagenes/4m3s.gif', '3', fuego,'./imagenes/CharmanderAvatar.png', 80, 400)
-let stitchEnemigo = new Mokepon('Stitch', './imagenes/sti.gif', '3', agua ,'./imagenes/StitchHead.png', 150, 95)
-let hongoEnemigo = new Mokepon('Hongo', './imagenes/hongooo.gif', '3', planta, './imagenes/HongoAvatar.png', 320, 270)
+let charmanderEnemigo = new Mokepon('Charmander', './imagenes/4m3s.gif', '3', fuego,'./imagenes/CharmanderAvatar.png')
+let stitchEnemigo = new Mokepon('Stitch', './imagenes/sti.gif', '3', agua ,'./imagenes/StitchHead.png')
+let hongoEnemigo = new Mokepon('Hongo', './imagenes/hongooo.gif', '3', planta, './imagenes/HongoAvatar.png')
 
 
 
@@ -399,8 +410,6 @@ function presionado(event) {
 function iniciarMapa(){
 
     miMokepon = obtenerMokepon()
-    mapa.width = 600
-    mapa.height = 600
     intervalo = setInterval(pintarCanvas, 50)
     window.addEventListener('keydown', presionado)
     window.addEventListener('keyup', detener)
