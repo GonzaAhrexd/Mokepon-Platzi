@@ -178,10 +178,10 @@ function seleccionarMascotaJugador() {
             MascotaJugador = mokepon.nombre
             spanMascotaJugador.innerHTML = mokepon.nombre
             tarjetaJugador.style.backgroundColor = mokepon.tipo.color
-            seleccionarMokepon(MascotaJugador)
+            
         }
     })
-
+    seleccionarMokepon(MascotaJugador)
     extraerAtaques(MascotaJugador)
     
     iniciarMapa()
