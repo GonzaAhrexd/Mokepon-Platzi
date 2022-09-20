@@ -41,20 +41,20 @@ let vicE = 0;
 let combate = false;
 let lienzo = mapa.getContext('2d')
 let intervalo
-let alturaBuscada 
+let alturaBuscada
 let anchoMapa = window.innerWidth - 20
 const anchoMaximo = 600
 
-if(anchoMapa>anchoMaximo){
+if (anchoMapa > anchoMaximo) {
     anchoMapa = anchoMaximo - 20
 }
-alturaBuscada= anchoMapa * 600 / 600
+alturaBuscada = anchoMapa * 600 / 600
 
 mapa.width = anchoMapa
 mapa.height = alturaBuscada
 //Clases
 class Mokepon {
-    constructor(nombre, foto, vida, tipo, fotoMapa, x=10, y=10) {
+    constructor(nombre, foto, vida, tipo, fotoMapa, x = 10, y = 10) {
         this.nombre = nombre;
         this.foto = foto;
         this.vida = vida;
@@ -69,7 +69,7 @@ class Mokepon {
         this.velocidadX = 0
         this.velocidadY = 0
     }
-    pintarMokepon(){
+    pintarMokepon() {
         lienzo.drawImage(
             this.mapaFoto,
             this.x,
@@ -93,34 +93,31 @@ let agua = new Tipo('Agua', 'tarjetaAgua', 'rgb(17, 17, 168)')
 let planta = new Tipo('Planta', 'tarjetaPlanta', 'rgb(19, 168, 19)')
 
 //Mokepones
-let charmander = new Mokepon('Charmander', './imagenes/4m3s.gif', '3', fuego,'./imagenes/CharmanderAvatar.png')
-let stitch = new Mokepon('Stitch', './imagenes/sti.gif', '3', agua ,'./imagenes/StitchHead.png')
+let charmander = new Mokepon('Charmander', './imagenes/4m3s.gif', '3', fuego, './imagenes/CharmanderAvatar.png')
+let stitch = new Mokepon('Stitch', './imagenes/sti.gif', '3', agua, './imagenes/StitchHead.png')
 let hongo = new Mokepon('Hongo', './imagenes/hongooo.gif', '3', planta, './imagenes/HongoAvatar.png')
 
-let charmanderEnemigo = new Mokepon('Charmander', './imagenes/4m3s.gif', '3', fuego,'./imagenes/CharmanderAvatar.png')
-let stitchEnemigo = new Mokepon('Stitch', './imagenes/sti.gif', '3', agua ,'./imagenes/StitchHead.png')
-let hongoEnemigo = new Mokepon('Hongo', './imagenes/hongooo.gif', '3', planta, './imagenes/HongoAvatar.png')
 
-
-
-//Ataques Mokepones
-charmander.ataques.push(
+const CHARMANDER_ATAQUES = [
     { nombre: 'Ascuas', id: 'boton-Lanzallamas' },
     { nombre: 'Arañazo', id: 'boton-Hidrobomba' },
     { nombre: 'Lanzallamas', id: 'boton-Gigadrenado' },
-)
-
-stitch.ataques.push(
+]
+const STITCH_ATAQUES = [
     { nombre: 'Placaje', id: 'boton-Lanzallamas' },
     { nombre: 'Atraccion', id: 'boton-Hidrobomba' },
     { nombre: 'Doble equipo', id: 'boton-Gigadrenado' },
-)
+]
 
-hongo.ataques.push(
+const HONGO_ATAQUES = [
     { nombre: 'Polvo veneno', id: 'boton-Lanzallamas' },
     { nombre: 'Teletransportacion', id: 'boton-Hidrobomba' },
     { nombre: 'Rayo solar', id: 'boton-Gigadrenado' },
-)
+]
+charmander.ataques.push(...CHARMANDER_ATAQUES)
+stitch.ataques.push(...STITCH_ATAQUES)
+hongo.ataques.push(...HONGO_ATAQUES)
+//Ataques Mokepones
 
 mokepones.push(charmander, stitch, hongo)
 
@@ -147,12 +144,12 @@ function iniciarJuego() {
     unirseAlJuego()
 }
 
-function unirseAlJuego(){
+function unirseAlJuego() {
     fetch("http://localhost:8080/unirse")
         .then(function (res) {
-            if(res.ok){
+            if (res.ok) {
                 res.text()
-                    .then(function(respuesta){
+                    .then(function (respuesta) {
                         console.log(respuesta)
                         jugadorId = respuesta
                     })
@@ -169,30 +166,30 @@ function seleccionarMascotaJugador() {
     ocultarMascota.style.display = 'none'
     ocultarAtaque.style.display = 'none'
     verMapa.style.display = 'flex'
-   
+
 
     let tarjetaJugador = document.getElementById("one")
     mokepones.forEach((mokepon) => {
         if (document.getElementById(mokepon.nombre).checked) {
-           
+
             MascotaJugador = mokepon.nombre
             spanMascotaJugador.innerHTML = mokepon.nombre
             tarjetaJugador.style.backgroundColor = mokepon.tipo.color
-            
+
         }
     })
     seleccionarMokepon(MascotaJugador)
     extraerAtaques(MascotaJugador)
-    
+
     iniciarMapa()
 
 }
 
-function seleccionarMokepon(MascotaJugador){
-    fetch(`http://localhost:8080/mokepon/${jugadorId}`,({
+function seleccionarMokepon(MascotaJugador) {
+    fetch(`http://localhost:8080/mokepon/${jugadorId}`, ({
         method: "post",
-        headers:  {
-             "Content-Type" : "application/json"
+        headers: {
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
             mokepon: MascotaJugador
@@ -258,7 +255,7 @@ function secuenciaAtaque() {
 }
 
 function seleccionarMascotaEnemigo(enemigo) {
-    
+
     let spanMascotaEnemigo = document.getElementById("mascota-enemigo")
     let tarjetaEnemigo = document.getElementById("two")
     MascotaEnemigo = enemigo
@@ -319,7 +316,7 @@ function iniciarPelea() {
             spanVidaJ.innerHTML = vicJ
             final()
         }
-        
+
         movEn.innerHTML = indexAtaqueEnemigo;
     }
 
@@ -382,15 +379,14 @@ function pintarCanvas() {
     miMokepon.x = miMokepon.x + miMokepon.velocidadX
     miMokepon.y = miMokepon.y + miMokepon.velocidadY
     lienzo.clearRect(0, 0, mapa.width, mapa.height)
-    lienzo.drawImage(mapaBG,0,0,mapa.height,mapa.width)
+    lienzo.drawImage(mapaBG, 0, 0, mapa.height, mapa.width)
 
     miMokepon.pintarMokepon()
-    enviarPosicion(miMokepon.x,miMokepon.y)
+    enviarPosicion(miMokepon.x, miMokepon.y)
     charmanderEnemigo.pintarMokepon()
     stitchEnemigo.pintarMokepon()
     hongoEnemigo.pintarMokepon()
-    if(miMokepon.velocidadX !==0||miMokepon.velocidadY !==0)
-    {
+    if (miMokepon.velocidadX !== 0 || miMokepon.velocidadY !== 0) {
         colision(charmanderEnemigo)
         colision(stitchEnemigo)
         colision(hongoEnemigo)
@@ -419,41 +415,64 @@ function detener() {
     miMokepon.velocidadY = 0
 }
 
-function enviarPosicion(x,y){
-    fetch(`https://localhost:8080/mokepon/${jugadorId}/posicion`, {
-    method:"post",
-    headers:{
-        "Content-Type" :  "application/json"
-    },
-    body: JSON.stringify({
-        x,
-        y
+function enviarPosicion(x, y) {
+    fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            x,
+            y
+        })
+
     })
-})
+        .then(function (res) {
+            if (res.ok) {
+                res.json()
+                    .then(function ({ enemigos }) {
+                        console.log(enemigos)
+                        let mokeponEnemigo = null
+                        enemigos.forEach(function (enemigo) {
+                            const mokeponNombre = enemigo.mokepon.nombre || "";
+                            if (mokeponNombre === "Charmander") {
+                                let mokeponEnemigo = new Mokepon('Charmander', './imagenes/4m3s.gif', '3', fuego, './imagenes/CharmanderAvatar.png')
+                            }
+                            if (mokeponNombre === "Stitch") {
+                                let mokeponEnemigo = new Mokepon('Stitch', './imagenes/sti.gif', '3', agua, './imagenes/StitchHead.png')
+                            }
+                            if (mokeponNombre === "Hongo") {
+                                let mokeponEnemigo = new Mokepon('Hongo', './imagenes/hongooo.gif', '3', planta, './imagenes/HongoAvatar.png')
+                            }
+                        })
+
+                    })
+            }
+        })
 }
 
 function presionado(event) {
-    if(!combate){
+    if (!combate) {
         switch (event.key) {
-        case 'ArrowUp':
-            moverCharmanderUp()
-            break;
-        case 'ArrowDown':
-            moverCharmanderDown()
-            break;
-        case 'ArrowLeft':
-            moverCharmanderLeft()
-            break;
-        case 'ArrowRight':
-            moverCharmanderRight()
-            break;
-        default:
-            break;
-    }
+            case 'ArrowUp':
+                moverCharmanderUp()
+                break;
+            case 'ArrowDown':
+                moverCharmanderDown()
+                break;
+            case 'ArrowLeft':
+                moverCharmanderLeft()
+                break;
+            case 'ArrowRight':
+                moverCharmanderRight()
+                break;
+            default:
+                break;
+        }
     }
 }
 
-function iniciarMapa(){
+function iniciarMapa() {
 
     miMokepon = obtenerMokepon()
     intervalo = setInterval(pintarCanvas, 50)
@@ -461,8 +480,8 @@ function iniciarMapa(){
     window.addEventListener('keyup', detener)
 }
 
-function obtenerMokepon(){
-    for(let i = 0; i< mokepones.length; i++){
+function obtenerMokepon() {
+    for (let i = 0; i < mokepones.length; i++) {
         if (MascotaJugador === mokepones[i].nombre) {
             return mokepones[i];
         }
@@ -470,32 +489,32 @@ function obtenerMokepon(){
 
 }
 
-function colision(enemigo){
+function colision(enemigo) {
     const arribaEnemigo = enemigo.y
     const abajoEnemigo = enemigo.y + enemigo.height
-    
+
     const izquierdaEnemigo = enemigo.x
     const derechaEnemigo = enemigo.x + enemigo.width
-    
+
     const arribamiMokepon = miMokepon.y
     const abajomiMokepon = miMokepon.y + miMokepon.height
-    
+
     const izquierdamiMokepon = miMokepon.x
     const derechamiMokepon = miMokepon.x + miMokepon.width
 
-    if(
+    if (
         abajomiMokepon < arribaEnemigo ||
         arribamiMokepon > abajoEnemigo ||
         izquierdamiMokepon > derechaEnemigo ||
-        derechamiMokepon < izquierdaEnemigo 
-        ){
-            return ;
-            
+        derechamiMokepon < izquierdaEnemigo
+    ) {
+        return;
+
 
     }
-    else{
+    else {
         detener()
-      
+
         combate = true
         verMapa.style.display = 'none'
         ocultarAtaque.style.display = 'flex'
