@@ -385,6 +385,7 @@ function pintarCanvas() {
     lienzo.drawImage(mapaBG,0,0,mapa.height,mapa.width)
 
     miMokepon.pintarMokepon()
+    enviarPosicion(miMokepon.x,miMokepon.y)
     charmanderEnemigo.pintarMokepon()
     stitchEnemigo.pintarMokepon()
     hongoEnemigo.pintarMokepon()
@@ -416,6 +417,19 @@ function detener() {
 
     miMokepon.velocidadX = 0
     miMokepon.velocidadY = 0
+}
+
+function enviarPosicion(x,y){
+    fetch(`https://localhost:8080/mokepon/${jugadorId}/posicion`, {
+    method:"post",
+    headers:{
+        "Content-Type" :  "application/json"
+    },
+    body: JSON.stringify({
+        x,
+        y
+    })
+})
 }
 
 function presionado(event) {
