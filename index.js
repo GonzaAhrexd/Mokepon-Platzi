@@ -25,6 +25,7 @@ class Mokepon {
     }
 }
 
+
 app.get("/unirse",  (req,res)  =>{
     const id = `${Math.random()}`
     const jugador = new Jugador(id)
@@ -40,7 +41,7 @@ app.post("/mokepon/:jugadorId" , (req,res) =>{
     const jugadorId = req.params.jugadorId  || ""
     const nombre  = req.body.mokepon || ""
     const mokepon = new Mokepon(nombre)
-    const jugadorIndex = jugadores.findIndex((jugador)  => jugadorId  === jugadorId)
+    const jugadorIndex = jugadores.findIndex((jugador)  => jugadorId  === jugador.id)
     
     if(jugadorIndex>= 0){
         jugadores[jugadorIndex].asignarMokepon(mokepon)
@@ -57,13 +58,14 @@ app.post("/mokepon/:jugadorId/posicion", (req,res) =>{
     const x = req.body.x || 0
     const y = req.body.y || 0
 
-    const jugadorIndex = jugadores.findIndex((jugador)  => jugadorId  === jugadorId)
+    const jugadorIndex = jugadores.findIndex((jugador)  => jugadorId  === jugador.id)
     
     if(jugadorIndex>= 0){
         jugadores[jugadorIndex].actualizarPosicion(x,y)
     }
 
     const enemigos = jugadores.filter((jugador) =>  jugadorId !== jugador.id)
+    
     res.send({
         enemigos
     })

@@ -19,6 +19,7 @@ const mapa = document.getElementById("mapa")
 //Variables Globales
 let jugadorId = null
 let mokepones = []
+let mokeponesEnemigos = []
 let MascotaJugador = " "
 let MascotaEnemigo = " "
 let ataqueJugador = []
@@ -54,7 +55,8 @@ mapa.width = anchoMapa
 mapa.height = alturaBuscada
 //Clases
 class Mokepon {
-    constructor(nombre, foto, vida, tipo, fotoMapa, x = 10, y = 10) {
+    constructor(nombre, foto, vida, tipo, fotoMapa, id = null) {
+        this.id = id;
         this.nombre = nombre;
         this.foto = foto;
         this.vida = vida;
@@ -383,14 +385,12 @@ function pintarCanvas() {
 
     miMokepon.pintarMokepon()
     enviarPosicion(miMokepon.x, miMokepon.y)
-    charmanderEnemigo.pintarMokepon()
-    stitchEnemigo.pintarMokepon()
-    hongoEnemigo.pintarMokepon()
-    if (miMokepon.velocidadX !== 0 || miMokepon.velocidadY !== 0) {
-        colision(charmanderEnemigo)
-        colision(stitchEnemigo)
-        colision(hongoEnemigo)
-    }
+
+    mokeponesEnemigos.forEach(function (mokepon){
+        mokepon.pintarMokepon()
+        colision(mokepon)
+    })
+  
 }
 
 function moverCharmanderRight() {
@@ -432,18 +432,23 @@ function enviarPosicion(x, y) {
                 res.json()
                     .then(function ({ enemigos }) {
                         console.log(enemigos)
-                        let mokeponEnemigo = null
-                        enemigos.forEach(function (enemigo) {
-                            const mokeponNombre = enemigo.mokepon.nombre || "";
+
+                        mokeponesEnemigos = enemigos.map(function (enemigo) {
+                            let mokeponEnemigo = null
+                            let mokeponNombre = enemigo.mokepon.nombre || ""
                             if (mokeponNombre === "Charmander") {
-                                let mokeponEnemigo = new Mokepon('Charmander', './imagenes/4m3s.gif', '3', fuego, './imagenes/CharmanderAvatar.png')
+                                mokeponEnemigo = new Mokepon('Charmander', './imagenes/4m3s.gif', '3', fuego, './imagenes/CharmanderAvatar.png')
                             }
-                            if (mokeponNombre === "Stitch") {
-                                let mokeponEnemigo = new Mokepon('Stitch', './imagenes/sti.gif', '3', agua, './imagenes/StitchHead.png')
+                            else if (mokeponNombre === "Stitch") {
+                                mokeponEnemigo = new Mokepon('Stitch', './imagenes/sti.gif', '3', agua, './imagenes/StitchHead.png')
                             }
-                            if (mokeponNombre === "Hongo") {
-                                let mokeponEnemigo = new Mokepon('Hongo', './imagenes/hongooo.gif', '3', planta, './imagenes/HongoAvatar.png')
+                            else if (mokeponNombre === "Hongo") {
+                                mokeponEnemigo = new Mokepon('Hongo', './imagenes/hongooo.gif', '3', planta, './imagenes/HongoAvatar.png')
                             }
+                            mokeponEnemigo.x = enemigo.x
+                            mokeponEnemigo.y = enemigo.y
+                            return mokeponEnemigo
+
                         })
 
                     })
